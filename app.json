@@ -1,0 +1,56 @@
+{
+    "pages": [
+        "pages/main/main",
+        "pages/first/first",
+     
+        "pages/mine/mine",
+        "pages/fusion/fusion",
+        "pages/preview/preview",
+        "pages/pay/pay",
+        "pages/cdkey/cdkey",
+        "pages/koutu/koutu",
+        "pages/dongman/dongman",
+        "pages/katong/katong",
+        "pages/videoExtract/videoExtract",
+        "pages/watermark/watermark",
+        "pages/share/share",
+        "pages/myProduct/myProduct"
+    ],
+    
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#000",
+        "navigationBarTitleText": "换装",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "custom": true,
+        "color": "#7C7E94",
+        "selectedColor": "#E91E63",
+        "borderStyle": "black",
+        "backgroundColor": "#000000",
+        "list": [
+            {
+                "pagePath": "pages/main/main",
+                "text": "换装变脸",
+                "iconPath": "pages/image/xiaochengxu_ico_tab_huan_pre_xxh.png",
+                "selectedIconPath": "pages/image/xiaochengxu_ico_tab_huan_nor_xxh.png"
+            },
+            {
+             
+              "pagePath":    "pages/mine/mine",
+              "text": "卡通",
+              "iconPath": "pages/image/xiaochengxu_ico_tab_video_nor_xxh.png",
+              "selectedIconPath": "pages/image/xiaochengxu_ico_tab_video_pre_xxh.png"
+          },
+            {
+             
+                "pagePath": "pages/first/first",
+                "text": "首页",
+                "iconPath": "pages/image/xiaochengxu_ico_tab_video_nor_xxh.png",
+                "selectedIconPath": "pages/image/xiaochengxu_ico_tab_video_pre_xxh.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

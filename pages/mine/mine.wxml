@@ -1,0 +1,24 @@
+<view class="page-container">
+    <view style="display: flex;flex-direction: column;height: 100%;">
+        <view style="height:90rpx;margin-left:20rpx;margin-right:20rpx;display: flex;flex-direction: row;margin-top: 10rpx;justify-content: space-between;" wx:if="{{hasUserInfo}}">
+            <view style="display: flex;flex-direction: column;align-items: flex-start;">
+                <text style="color:#84808C;font-size:40rpx;line-height:40rpx;">{{folk.nickname}}</text>
+                <view style="display: flex;flex-direction: row;margin-top: 10rpx;">
+                    <text style="color:#84808C;font-size:30rpx;line-height:40rpx;">{{vipLevelName}}</text>
+                    <text style="color:#84808C;font-size:30rpx;line-height:40rpx;margin-left: 30rpx;">{{expireTime}}</text>
+                </view>
+            </view>
+            <image src="{{folk.portrait}}" style="width:90rpx;height:90rpx;border-radius: 45rpx;"></image>
+        </view>
+        <view bindtap="login" style="height:90rpx;margin-left:20rpx;margin-right:20rpx;display: flex;flex-direction: row;margin-top: 10rpx;justify-content: space-between;" wx:else>
+            <text style="color:#84808C;font-size:50rpx;line-height:90rpx;margin-left:10rpx;">未登录</text>
+            <image src="{{head_ico}}" style="width:90rpx;height:90rpx;"></image>
+        </view>
+        <image bindtap="jump2Pay" mode="heightFix" src="{{vipPic}}" style="height:162rpx;margin-left: 25rpx;margin-right: 25rpx;margin-top:20rpx;"></image>
+        <text style="color:#c54525;margin-left:50rpx;margin-right:50rpx;font-size: 30rpx;text-align: center;">
+            产品使用中遇到问题，请联系微信:WSMAX888
+        </text>
+        <ad-custom unit-id="adunit-97eecdc336c3feb2"></ad-custom>
+    </view>
+    
+</view>

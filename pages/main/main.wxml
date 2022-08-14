@@ -1,0 +1,36 @@
+<view class="page-container">
+    
+    <view style="width:100%;height:100%;display:flex;flex-direction: column;">
+        <scroll-view class="scroll-view_H" enableFlex="{{enableFlex}}" enhanced="{{enhanced}}" scrollIntoView="{{menuItemId}}" scrollX="{{scrollX}}" showScrollbar="{{showScrollBar}}">
+            <view bindtap="selectCategory" class="menu-item" data-item="{{item.value}}" id="{{item.id}}" wx:for="{{categorys}}" wx:for-index="idx" wx:key="unique">
+                <view style="height:95rpx">
+                    <text class="menu-text-selected" wx:if="{{item.value==currentCategory}}">{{item.value}}</text>
+                    <text class="menu-text" wx:else>{{item.value}}</text>
+                </view>
+                <view class="select-line" wx:if="{{item.value==currentCategory}}"></view>
+            </view>
+        </scroll-view>
+      
+        <view style="width: 100%;height:0rpx;flex:1;margin-top: 10rpx;margin-bottom: 10rpx;">
+            <swiper autoplay="{{autoplay}}" bindchange="onPageChange" current="{{pageIndex}}" style="height:100%;">
+                <swiper-item wx:for="{{categorys}}" wx:for-index="idx" wx:key="unique">
+                    <view style="height: 100%;">
+                        <scroll-view bindrefresherrefresh="onRefresh" bindscrolltolower="onScrollToLower" refresherDefaultStyle="white" refresherEnabled="{{faceRefreshEnabled}}" refresherTriggered="{{refresherTriggered}}" scrollY="true" style="height: 100%;width:100%;">
+                            
+                            <block wx:for="{{faceListMap[ item['value'] ]}}" wx:for-index="faceIdx" wx:for-item="faceItem" wx:key="unique">
+                                <view style="width:350rpx;height:550rpx;display: inline-block;margin:12rpx;display: inline-block;" >
+                                    <image bindtap="onSelectFace" class="face-cover" data-item="{{faceItem}}" mode="aspectFill" src="{{faceItem.cover}}"></image>
+                                </view>
+                                
+                                <view wx:if="{{(faceIdx+1)%6==0&&cadid}}" class="adad">
+                                    <ad-custom unit-id="{{cadid}}"></ad-custom>
+                                </view>
+                            </block>
+                            <view style="height:160rpx;display:inline-block;width:750rpx;"></view>
+                        </scroll-view>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+</view>

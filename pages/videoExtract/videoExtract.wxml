@@ -1,0 +1,39 @@
+<view class="page-container-white">
+    
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <view style="margin-left:30rpx;margin-right:30rpx;">
+            <textarea bindinput="onVideoUrlInput" maxlength="-1" placeholder="请输入视频地址" style="border:1rpx solid red;border-radius: 10rpx;height:200rpx;width:100%;" value="{{defaltInputContent}}"></textarea>
+        </view>
+        <view style="margin-left:30rpx;margin-right:30rpx;height:500rpx;margin-top:30rpx;margin-bottom:30rpx;" wx:if="{{readyPlayVideo}}">
+            <video controls autoplay="{{true}}" id="myVideo" showCenterPlayBtn="{{false}}" showFullscreenBtn="{{false}}" showPlayBtn="{{true}}" src="{{resultVideo}}" style="width:100%;height:100%;"></video>
+        </view>
+        <view bindtap="showad" style="margin-left: 50rpx;margin-right:50rpx;margin-top:20rpx;height:80rpx;background-color:#FD4274;border-radius: 40rpx;text-align: center;margin-bottom:30rpx;" wx:if="{{readyPlayVideo}}">
+            <text style="color:white;font-size:40rpx;text-align: center;line-height:80rpx;">保存</text>
+        </view>
+        <view bindtap="videoExtract" style="margin-left: 50rpx;margin-right:50rpx;margin-top:20rpx;height:80rpx;background-color:#FD4274;border-radius: 40rpx;text-align: center;margin-bottom:30rpx;" wx:else>
+            <text style="color:white;font-size:40rpx;text-align: center;line-height:80rpx;">立即提取</text>
+        </view>
+        
+            <ad-custom unit-id="{{cadid}}"></ad-custom>
+        
+        <view style="margin-left:30rpx;margin-right:30rpx;display: flex;flex-direction: column;margin-top:30rpx;">
+            <text style="color:#B2BBC2;font-size:30rpx;">常见问题</text>
+            <text style="color:#333333;font-size:30rpx;margin-top:30rpx;">提取后还有水印吗？</text>
+            <text style="color:#B2BBC2;font-size:30rpx;">理论上提取的视频与原视频一致，所以如果原视频本身就有水印，我们提取后也是同样有水印的。</text>
+            <text style="color:#333333;font-size:30rpx;margin-top:30rpx;">提示解析失败？</text>
+            <text style="color:#B2BBC2;font-size:30rpx;">请尝试使用浏览器打开该链接，若无法打开则不能解析。</text>
+        </view>
+    </view>
+    <view bindtap="hideSelectSaveTypeDialog" wx:if="{{showSelectSaveTypeDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 40rpx;">每天有一次免费保存机会，您可以选择使用免费机会或者付费成为VIP</text>
+            <view bindtap="freeSave" class="stroke-large-btn" style="margin-top: 80rpx;">
+                <text style="color:black;font-size:30rpx;text-align:center;width:100%;">免费保存</text>
+            </view>
+            <view bindtap="paySave" class="solid-large-btn" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">去付费</text>
+            </view>
+        </view>
+    </view>
+</view>

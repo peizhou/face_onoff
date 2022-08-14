@@ -1,0 +1,33 @@
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.select-line {
+    background-color: #fd4274;
+    height: 5rpx;
+    width: 100%;
+}
+
+.menu-text {
+    color: #fff;
+    height: 100%;
+}
+
+.menu-text,.menu-text-selected {
+    font-size: 35rpx;
+    line-height: 100rpx;
+}
+
+.menu-text-selected {
+    color: #fd4274;
+}
+
+.face-cover {
+    border-radius: 10rpx;
+    height: 100%;
+    width: 100%;
+}

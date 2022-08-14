@@ -1,0 +1,23 @@
+.menu-item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.menu-item-image {
+    border-radius: 50%;
+    height: 80rpx;
+    width: 80rpx;
+}
+
+.menu-item-text {
+    color: #727272;
+    font-size: 30rpx;
+}
+
+.face-cover {
+    border-radius: 10rpx;
+    height: 100%;
+    width: 100%;
+}

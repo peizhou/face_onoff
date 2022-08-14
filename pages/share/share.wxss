@@ -1,0 +1,7 @@
+.page-bg {
+    background: linear-gradient(180deg,#8909c6,#f6019c);
+}
+
+.gradient-color-button {
+    background: linear-gradient(90deg,#ff009c,#f3b653);
+}

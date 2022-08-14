@@ -1,0 +1,76 @@
+<view class="page-container">
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <video controls autoplay="{{true}}" binderror="videoErrorCallback" id="myVideo" showCenterPlayBtn="{{false}}" showFullscreenBtn="{{false}}" showPlayBtn="{{true}}" src="{{faceItem.url}}" style="width:100%;height: 100%;flex:1;" wx:if="readyPlayVideo"></video>
+        <view style="height:100rpx;width:100%;margin-bottom:10rpx;margin-top:10rpx;display: flex;flex-direction: row;margin-left: 10rpx;">
+            <view bindtap="selectFacePic" style="width:100rpx;height:100rpx;display: flex;flex-direction: row;justify-content: center;align-items: center;">
+                <image src="{{icon_camera}}" style="width:70rpx;height:70rpx;"></image>
+            </view>
+            <scroll-view enableFlex="{{enableFlex}}" enhanced="{{enhanced}}" scrollX="{{scrollX}}" showScrollbar="{{showScrollBar}}" style="display:flex;height:100rpx;width: 600rpx;">
+                <view style="display: flex;flex-direction: row;">
+                    <view bindlongpress="onDeleteFacePic" bindtap="onSelectFacePic" data-item="{{item}}" style="width:100rpx;height:100rpx;margin-left: 10rpx;position: relative;" wx:for="{{faceList}}" wx:for-index="idx" wx:key="unique">
+                        <image src="{{item}}" style="margin-left:10rpx;margin-top:10rpx;width:80rpx;height:80rpx;border-radius: 50%;"></image>
+                        <image src="{{ring}}" style="position: absolute;left:10rpx;top:10rpx;width:80rpx;height:80rpx;" wx:if="{{item==selectedFacePic}}"></image>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view bindtap="makeFuceFusion" style="width:550rpx;height:80rpx;background-color:#FD4274;margin-left:100rpx;margin-bottom: 20rpx;border-radius: 40rpx;display: flex;align-items: center;justify-content: center;">
+            <text style="color:white;font-size:30rpx;text-align:center;width:100%;">立即制作</text>
+        </view>
+    </view>
+    <view bindtap="hideHintDialog" wx:if="{{showHintDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 20rpx;">温馨提示</text>
+            <text style="text-align: left;font-size:30rpx;line-height: 50rpx;color:black;padding-left: 20rpx;padding-right: 20rpx;">
+                1、请确保您所使用的照片获得照片本人授权同意，严禁使用未获得本人授权同意的照片， 如果因照片未授权对他人肖像权及其他相关权利造成侵犯所产生的的法律责任由用户本人承担。
+ 2、软件不会保留用户所使用的人脸照片和数据，照片在生成视频后会立刻删除。
+            </text>
+            <view bindtap="onHasReadHint" style="width:500rpx;height:80rpx;background-color:#FD4274;margin-top: 20rpx;margin-bottom: 20rpx;border-radius: 40rpx;display: flex;align-items: center;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">知道了</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideSelectPicDialog" wx:if="{{showSelectPicDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 20rpx;">请确保是正脸照片</text>
+            <image src="{{standard_face}}" style="width:170rpx;height:170rpx;margin-top: 20rpx;"></image>
+            <view bindtap="selectFromLocal" class="stroke-large-btn" style="margin-top: 80rpx;">
+                <text style="color:black;font-size:30rpx;text-align:center;width:100%;">从相册中选择</text>
+            </view>
+            <view bindtap="selectFromCamera" class="solid-large-btn" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">去拍摄</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{showCropPicDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;display: flex;flex-direction: column;justify-items: center;align-items: center;">
+            <view style="width:100%;height:60rpx;margin-top: 20rpx;display: flex;flex-direction: row;justify-content: center;">
+                <text style="font-size: 35rpx;color: white;text-align: center;">图片裁剪</text>
+                <view bindtap="showCropResult" style="background-color: #FD4274;position: absolute;right:20rpx;border-radius: 30rpx;height:60rpx;width:150rpx;text-align: center;">
+                    <text style="font-size: 35rpx;color: white;text-align: center;line-height: 60rpx;">下一步</text>
+                </view>
+            </view>
+            <view style="width:750rpx;flex:1;margin-top: 20rpx;margin-bottom: 20rpx;position: relative;">
+                <image mode="aspectFit" src="{{cropPicPath}}" style="width: 100%;height:100%;"></image>
+                <view style="position: absolute;left:0;top:0;right:0;bottom:0;">
+                    <canvas bindtouchcancel="onCanvasTouchCancel" bindtouchend="onCanvasTouchEnd" bindtouchmove="onCanvasTouchMove" bindtouchstart="onCanvasTouchStart" id="cropCanvasId" style="width:100%;height:100%;" type="2d"></canvas>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{showCropResultDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;display: flex;flex-direction: column;justify-items: center;align-items: center;">
+            <view style="width:100%;height:60rpx;margin-top: 20rpx;display: flex;flex-direction: row;justify-content: center;">
+                <text style="font-size: 35rpx;color: white;text-align: center;">裁剪结果</text>
+                <view bindtap="confirmUse" style="background-color: #FD4274;position: absolute;right:20rpx;border-radius: 30rpx;height:60rpx;width:150rpx;text-align: center;">
+                    <text style="font-size: 35rpx;color: white;text-align: center;line-height: 60rpx;">确定</text>
+                </view>
+            </view>
+            <view style="width:750rpx;flex:400rpx;margin-top: 20rpx;margin-bottom: 20rpx;position: relative;display: flex;flex-direction: row;justify-items: center;justify-content: center;">
+                <canvas id="cropResultCanvasId" style="width:300rpx;height:300rpx" type="2d"></canvas>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,49 @@
+<view class="page-container-white">
+    <view class="page-bg" style="display: flex;flex-direction: column;height: 100%;width: 100%;position: relative;">
+        <view style="position: absolute;left:0;top:0;right:0;bottom:0;">
+            <image mode="widthFix" src="../image/share_bg_pic.png" style="width:100%;"></image>
+        </view>
+        <view style="position: absolute;left:0;top:0;right:0;bottom:0;display: flex;flex-direction: column;">
+            <view wx:if="{{isSelf}}">
+                <image mode="widthFix" src="../image/invite_5_friend.png" style="width:400rpx;margin-top: 50rpx;margin-left:50rpx;"></image>
+                <image mode="widthFix" src="../image/free_save_one_time.png" style="width:350rpx;margin-top: 10rpx;margin-left:300rpx;"></image>
+            </view>
+            <view style="text-align: center;" wx:else>
+                <image mode="heightFix" src="../image/come_try.png" style="height:70rpx;margin-top: 50rpx;"></image>
+                <image mode="heightFix" src="../image/so_beautiful.png" style="height:60rpx;margin-top: 20rpx;"></image>
+            </view>
+            <view style="flex: 1;background-color: #F0EFFF;margin-left: 50rpx;margin-right: 50rpx;border-radius: 20rpx;margin-top:20rpx;margin-bottom: 30rpx;display: flex;flex-direction: column;">
+                <view style="margin-left:20rpx;width:610rpx;margin-top: 20rpx;flex:1;position:relative;">
+                    <video controls autoplay="{{true}}" binderror="videoErrorCallback" id="myVideo" showCenterPlayBtn="{{false}}" showFullscreenBtn="{{false}}" showPlayBtn="{{true}}" src="{{videoUrl}}" style="width:100%;height:100%;" wx:if="videoReady"></video>
+                </view>
+                <view style="margin-left: 30rpx;margin-right: 30rpx;margin-top: 20rpx;display:flex;flex-direction:row;justify-content: space-between;">
+                    <view style="width:100rpx;height:120rpx;position: relative;" wx:for="{{zhuli_list}}" wx:for-index="idx" wx:key="unique">
+                        <image src="{{item.header}}" style="width:100rpx;height:100rpx;border-radius: 50rpx;"></image>
+                        <view style="position: absolute;left:0;right:0;bottom:0;height:35rpx;background-color: #FE029B;border-radius: 20rpx;text-align: center;display: flex;align-items: center;flex-direction: column;" wx:if="{{item.state==1}}">
+                            <text style="color:#FEE30A;font-size:20rpx;text-align:center;line-height:35rpx;height:35rpx;">已解锁</text>
+                        </view>
+                        <view style="position: absolute;left:0;right:0;bottom:0;height:35rpx;background-color: white;border-radius: 20rpx;text-align: center;display: flex;align-items: center;flex-direction: column;" wx:else>
+                            <text style="color:#FF50B7;font-size:20rpx;text-align:center;line-height:35rpx;height:35rpx;">待解锁</text>
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{isSelf}}">
+                    <view bindtap="saveResult" class="gradient-color-button" style="margin-left: 20rpx;margin-right: 20rpx;margin-top: 20rpx;margin-bottom: 20rpx;height:90rpx;border-radius: 45rpx;text-align:center;" wx:if="{{hasFinished}}">
+                        <text style="color:white;font-size:40rpx;line-height:90rpx;text-align:center;font-weight: bold;">立即保存</text>
+                    </view>
+                    <view class="gradient-color-button" style="margin-left: 20rpx;margin-right: 20rpx;margin-top: 20rpx;margin-bottom: 20rpx;height:90rpx;border-radius: 45rpx;text-align:center;display: flex;flex-direction: row;" wx:else>
+                        <button openType="share" plain="{{true}}" style="width:100%;color:white;font-size:40rpx;font-weight: bold;border:none;">邀请好友得保存机会</button>
+                    </view>
+                </view>
+                <view style="margin-left: 20rpx;margin-right: 20rpx;margin-top: 20rpx;margin-bottom: 20rpx;height:90rpx;text-align:center;display: flex;flex-direction: row;justify-content: center;" wx:else>
+                    <view bindtap="doSameVideo" style="border-radius: 45rpx;flex: 1;height:90rpx;border: 1rpx solid #FD1793;">
+                        <text style="color:#FD1D90;font-size:40rpx;line-height:90rpx;text-align:center;font-weight: bold;">制作同款</text>
+                    </view>
+                    <view bindtap="zhuli" class="gradient-color-button" style="border-radius: 45rpx;flex: 1;margin-left: 20rpx;height:90rpx;">
+                        <text style="color:white;font-size:40rpx;line-height:90rpx;text-align:center;font-weight: bold;">帮TA解锁</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

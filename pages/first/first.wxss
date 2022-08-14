@@ -1,0 +1,16 @@
+.hint-dialog {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: column;
+    height: 500rpx;
+    height: -webkit-fit-content;
+    height: fit-content;
+    left: 50%;
+    margin-left: -325rpx;
+    margin-top: -250rpx;
+    position: fixed;
+    top: 50%;
+    width: 650rpx;
+}

@@ -1,0 +1,41 @@
+<view class="page-container-white">
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <image src="{{pay_card}}" style="width:710rpx;height:341rpx;margin-left: 20rpx;margin-top: 20rpx;"></image>
+        <view style="display: flex;flex-direction: row;height:60rpx;width:100%;margin-top: 30rpx;margin-bottom: 30rpx;">
+            <text style="font-size: 40rpx;color:black;margin-left:20rpx;font-weight: bold;">开通VIP服务</text>
+        </view>
+        <view wx:if="{{enable_pay}}">
+            <view style="height:240rpx;display: flex;flex-direction: row;margin-left: 20rpx;margin-right: 20rpx;" wx:if="{{payItemsReady}}">
+                <view bindtap="onSelectPayItem" class="pay-item" data-item="{{payItem.id}}" style="background-color: {{payItem.id==payItemSelectedId?payItemBgColorSelected:payItemBgColorNormal}};" wx:for="{{payItems}}" wx:for-index="itemIdx" wx:for-item="payItem" wx:key="unique">
+                    <view style="border: 1rpx solid {{payItem.id==payItemSelectedId?payItemBorderColorSelected:payItemBorderColorNormal}};width:100%;height:100%;border-radius: 14rpx;display: flex;flex-direction: column;justify-content: space-between;">
+                        <view style="height:60rpx;width:100%;text-align: center;margin-top:20rpx;">
+                            <text style="font-size: 30rpx;color:black;text-align: center;width:100%;font-weight: bold;">{{payItem.name}}</text>
+                        </view>
+                        <view style="width:100%;text-align: center;">
+                            <text style="font-size: 45rpx;color:#FD4274;text-align: center;width:100%;font-weight: bold;">¥{{payItem.payPrice}}</text>
+                        </view>
+                        <view style="width:100%;text-align: center;margin-bottom:20rpx;">
+                            <text style="font-size: 30rpx;color:#999999;text-align: center;width:100%;">原价¥{{payItem.orgPrice}}</text>
+                        </view>
+                        <image mode="widthFix" src="{{TAG_NEW_IMG}}" style="position: absolute;top:-15rpx;right:-5rpx;width:110rpx;" wx:if="{{payItem.tag==TAG_NEW}}"></image>
+                        <image mode="widthFix" src="{{TAG_HOT_IMG}}" style="position: absolute;top:-15rpx;right:-5rpx;width:110rpx;" wx:elif="{{payItem.tag==TAG_HOT}}"></image>
+                        <image mode="widthFix" src="{{TAG_RECOMMEND_IMG}}" style="position: absolute;top:-15rpx;right:-5rpx;width:110rpx;" wx:elif="{{payItem.tag==TAG_RECOMMEND}}"></image>
+                        <image mode="widthFix" src="{{TAG_BEST_VALUE_IMG}}" style="position: absolute;top:-15rpx;right:-5rpx;width:110rpx;" wx:elif="{{payItem.tag==TAG_BEST_VALUE}}"></image>
+                    </view>
+                </view>
+                <view bindtap="onSelectPayItem" class="pay-item" data-item="{{cdkeyItemId}}" style="background-color: {{cdkeyItemId==payItemSelectedId?payItemBgColorSelected:payItemBgColorNormal}}">
+                    <view style="border: 1rpx solid {{cdkeyItemId==payItemSelectedId?payItemBorderColorSelected:payItemBorderColorNormal}};width:100%;height:100%;border-radius: 14rpx;display: flex;flex-direction: column;justify-content:center;align-items: center;">
+                        <image mode="widthFix" src="{{cdkey}}" style="width:150rpx;"></image>
+                    </view>
+                    <image mode="widthFix" src="{{vip_tag_cdkey}}" style="position: absolute;top:-15rpx;right:-5rpx;width:110rpx;"></image>
+                </view>
+            </view>
+            <view bindtap="buyService" style="margin-left: 50rpx;margin-right: 50rpx;height:90rpx;background-color: #FD4274;border-radius: 45rpx;margin-top:50rpx;display: flex;flex-direction: column;">
+                <text style="color:white;font-size:40rpx;line-height:90rpx;width:100%;text-align: center;font-weight: bold;">立即开通</text>
+            </view>
+        </view>
+        <view style="text-align: center;" wx:else>
+            <text style="color:#FD4274;font-size:40rpx;line-height:90rpx;width:100%;text-align: center;">由于相关规范，iOS功能暂不可用</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="page-container-white">
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <input autoFocus bindinput="onCdkeyInput" maxlength="-1" placeholder="请输入激活码" style="height:100rpx;line-height: 100rpx;margin-left:50rpx;margin-right:50rpx;border-radius: 20rpx;border:1rpx solid #FD4274;padding-left: 10rpx;padding-right: 10rpx;"></input>
+        <view bindtap="activeCdKey" style="margin-left: 50rpx;margin-right: 50rpx;height:90rpx;background-color: #FD4274;border-radius: 45rpx;margin-top:50rpx;display: flex;flex-direction: column;">
+            <text style="color:white;font-size:40rpx;line-height:90rpx;width:100%;text-align: center;font-weight: bold;">立即激活</text>
+        </view>
+    </view>
+</view>

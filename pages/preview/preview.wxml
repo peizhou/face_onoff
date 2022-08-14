@@ -1,0 +1,37 @@
+<view class="page-container">
+ 
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <view class="water" wx:if="{{water}}">{{water}}</view>
+        <video controls autoplay="{{true}}" binderror="videoErrorCallback" id="myVideo" showCenterPlayBtn="{{false}}" showFullscreenBtn="{{false}}" showPlayBtn="{{true}}" src="{{videoUrl}}" style="width:100%;height: 100%;flex:1;" wx:if="readyPlayVideo"></video>
+        <view style="display: flex;flex-direction: row;justify-content: center;margin-top: 20rpx;margin-bottom: 20rpx;">
+            <view bindtap="showad" class="save-button">
+          
+                <button plain="{{true}}" style="font-size:30rpx;text-align:center;width:100%;color:white;border:none;">保存无水印</button>
+            </view>
+            <view bindtap="shareSave" class="share-button">
+                <button plain="{{true}}" style="font-size:30rpx;text-align:center;width:100%;color:white;border:none;">重新制作</button>
+            </view>
+        </view>
+    </view>
+
+    <view bindtap="hideSelectPayOrShareDialog" wx:if="{{showSelectPayOrShareDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog-select-pay">
+            <view style="width: 100%;position: relative;">
+                <image mode="widthFix" src="{{bg_tip}}" style="width: 100%;"></image>
+                <view style="position: absolute;left:0;top:-20rpx;right:0;bottom:0;display: flex;flex-direction: column;align-items: center;">
+                    <image mode="heightFix" src="{{tip}}" style="height:120rpx;"></image>
+                    <image mode="heightFix" src="{{save_times_out}}" style="height:60rpx;margin-top: 40rpx;"></image>
+                    <image mode="heightFix" src="{{title_save_one}}" style="height:40rpx;margin-top: 20rpx;"></image>
+                </view>
+            </view>
+            <view bindtap="paySave" class="gradient-btn" style="margin-top: 30rpx;width:500rpx;height:100rpx;border-radius: 50rpx;display: flex;flex-direction: row;align-items: center;justify-content: center;">
+                <image mode="heightFix" src="{{vip_icon}}" style="height:80rpx;"></image>
+                <text style="color:white;font-size:35rpx;text-align:left;line-height: 100rpx;margin-left:20rpx;">开通会员享无限次数</text>
+            </view>
+            <view bindtap="shareSave" style="margin-top: 30rpx;width:500rpx;height:100rpx;border-radius: 50rpx;display: flex;flex-direction: row;align-items: center;justify-content: center;border:1rpx solid #FC2D8A;margin-bottom: 30rpx;">
+                <text style="color:#F66074;font-size:35rpx;text-align:left;line-height: 100rpx;text-align: center;">分享好友 解锁权限</text>
+            </view>
+        </view>
+    </view>
+</view>

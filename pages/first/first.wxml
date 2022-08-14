@@ -1,0 +1,39 @@
+<view class="page-container">
+    <view wx:if="{{cadid}}" class="adad">
+        <ad-custom unit-id="{{cadid}}"></ad-custom>
+    </view>
+    <scroll-view scrollY="true" style="width:100%;background-color: black;">
+        <view style="width:100%;display:flex;flex-direction: column;margin-bottom: 150rpx;">
+            <text style="color:white;font-size:40rpx;margin-left:20rpx;">火爆功能</text>
+            <view bindtap="videoExtract" style="margin-left: 20rpx;margin-right:20rpx;margin-top:20rpx;">
+                <image mode="widthFix" src="../image/xiaochengxu_icon_video_extract.png" style="width:100%;"></image>
+            </view>
+            <view bindtap="videoExtract" style="margin-left: 50rpx;margin-right:50rpx;margin-top:20rpx;height:80rpx;background-color:#FD4274;border-radius: 40rpx;text-align: center;">
+                <text style="color:white;font-size:40rpx;text-align: center;line-height:80rpx;">视频无水印提取</text>
+            </view>
+            <text style="color:white;font-size:40rpx;margin-left:20rpx;margin-top:80rpx;">图片编辑</text>
+            <view style="margin-left:20rpx;margin-right:20rpx;position: relative;display: flex;flex-direction: row;margin-top:30rpx;">
+                <view bindtap="kouTu" style="flex: 1;position: relative;">
+                    <image mode="widthFix" src="{{ktqbj}}" style="width:100%;"></image>
+                    <text style="color:white;font-size:30rpx;position: absolute;left:20rpx;bottom:20rpx;">抠图去背景</text>
+                </view>
+                <view bindtap="watermark" style="flex: 1;position: relative;margin-left:30rpx;">
+                    <image mode="widthFix" src="{{yjqsy}}" style="width:100%;"></image>
+                    <text style="color:white;font-size:30rpx;position: absolute;left:20rpx;bottom:20rpx;">一键去水印</text>
+                </view>
+            </view>
+            <view style="margin-left:20rpx;margin-right:20rpx;position: relative;display: flex;flex-direction: row;margin-top:30rpx;">
+                <view bindtap="dongman" style="flex: 1;position: relative;">
+                    <image mode="widthFix" src="{{dmhkt}}" style="width:100%;"></image>
+                    <text style="color:white;font-size:30rpx;position: absolute;left:20rpx;bottom:20rpx;">动漫化照片</text>
+                </view>
+                <view bindtap="katong" style="flex: 1;position: relative;margin-left:30rpx;">
+                    <image mode="widthFix" src="{{kthtx}}" style="width:100%;"></image>
+                    <text style="color:white;font-size:30rpx;position: absolute;left:20rpx;bottom:20rpx;">卡通化头像</text>
+                </view>
+            </view>
+      
+        </view>
+        
+    </scroll-view>
+</view>

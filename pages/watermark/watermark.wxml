@@ -1,0 +1,44 @@
+<view class="page-container-white">
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <view style="width:100%;flex:1;background-color: #D8D8D8;position:relative;">
+            <image mode="aspectFill" src="{{touming_bg}}" style="width:100%;height:100%;"></image>
+            <view style="position: absolute;left:0;top:0;right:0;bottom:0;">
+                <canvas bindtouchcancel="onCanvasTouchCancel" bindtouchend="onCanvasTouchEnd" bindtouchmove="onCanvasTouchMove" bindtouchstart="onCanvasTouchStart" id="cropCanvasId" style="width:100%;height:100%;" type="2d"></canvas>
+            </view>
+        </view>
+        <view style="height:200rpx;">
+            <view style="display: flex;flex-direction: row;justify-content: space-between;margin-top: 50rpx;margin-left:50rpx;margin-right:50rpx;">
+                <view bindtap="uploadPic" style="width:250rpx;height:80rpx;border-radius:40rpx;border:1rpx solid #E91E63;text-align: center;">
+                    <text style="color:#E91E63;font-size:30rpx;line-height: 80rpx;">上传图片</text>
+                </view>
+                <view bindtap="showad" style="width:250rpx;height:80rpx;border-radius:40rpx;background-color: #E91E63;text-align: center;">
+                    <text style="color:white;font-size:30rpx;line-height: 80rpx;">保存图片</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideSelectPicDialog" wx:if="{{showSelectPicDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 40rpx;">请选择</text>
+            <view bindtap="selectFromLocal" class="stroke-large-btn" style="margin-top: 80rpx;">
+                <text style="color:black;font-size:30rpx;text-align:center;width:100%;">从相册中选择</text>
+            </view>
+            <view bindtap="selectFromCamera" class="solid-large-btn" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">去拍摄</text>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideSelectSaveTypeDialog" wx:if="{{showSelectSaveTypeDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 40rpx;">每天有一次免费保存机会，您可以选择使用免费机会或者付费成为VIP</text>
+            <view bindtap="freeSave" class="stroke-large-btn" style="margin-top: 80rpx;">
+                <text style="color:black;font-size:30rpx;text-align:center;width:100%;">免费保存</text>
+            </view>
+            <view bindtap="paySave" class="solid-large-btn" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">去付费</text>
+            </view>
+        </view>
+    </view>
+</view>

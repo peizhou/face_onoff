@@ -1,0 +1,130 @@
+<view class="page-container-white">
+    <view style="display: flex;flex-direction: column;height: 100%;width: 100%;">
+        <view style="width:100%;flex:1;background-color: #D8D8D8;position:relative;">
+            <image mode="aspectFill" src="{{touming_bg}}" style="width:100%;height:100%;"></image>
+            <view style="position: absolute;left:0;top:0;right:0;bottom:0;">
+                <canvas id="cropCanvasId" style="width:100%;height:100%;" type="2d"></canvas>
+            </view>
+        </view>
+        <view style="height:400rpx;">
+            <view style="width:100%;height:1rpx;background-color: #DFDFDF;margin-top: 30rpx;"></view>
+            <view style="display:flex;flex-direction:row;justify-content: space-between;margin-top: 30rpx;margin-left:20rpx;margin-right:20rpx;">
+                <view bindtap="draOrgPic" class="menu-item">
+                    <view style="width:80rpx;height:80rpx;background-color:#D8D8D8;border-radius:50%;"></view>
+                    <view>
+                        <text class="menu-item-text">原图</text>
+                    </view>
+                </view>
+                <view bindtap="drawOpacityPic" class="menu-item">
+                    <image class="menu-item-image" src="../image/touming.png"></image>
+                    <view>
+                        <text class="menu-item-text">透明</text>
+                    </view>
+                </view>
+                <view bindtap="selectBgColorDrawPic" class="menu-item">
+                    <image class="menu-item-image" src="../image/caise.png"></image>
+                    <view>
+                        <text class="menu-item-text">彩色</text>
+                    </view>
+                </view>
+                <view bindtap="selectBgPic" class="menu-item">
+                    <image class="menu-item-image" src="../image/ico_bg.png"></image>
+                    <view>
+                        <text class="menu-item-text">背景图片</text>
+                    </view>
+                </view>
+            </view>
+            <view style="display: flex;flex-direction: row;justify-content: space-between;margin-top: 30rpx;margin-left:50rpx;margin-right:50rpx;margin-bottom: 30rpx;">
+                <view bindtap="uploadPic" style="width:250rpx;height:80rpx;border-radius:40rpx;border:1rpx solid #E91E63;text-align: center;">
+                    <text style="color:#E91E63;font-size:30rpx;line-height: 80rpx;">上传图片</text>
+                </view>
+                <view bindtap="showad" style="width:250rpx;height:80rpx;border-radius:40rpx;background-color: #E91E63;text-align: center;">
+                    <text style="color:white;font-size:30rpx;line-height: 80rpx;">保存图片</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideSelectPicDialog" wx:if="{{showSelectPicDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 40rpx;">请选择</text>
+            <view bindtap="selectFromLocal" class="stroke-large-btn" style="margin-top: 80rpx;">
+                <text style="color:black;font-size:30rpx;text-align:center;width:100%;">从相册中选择</text>
+            </view>
+            <view bindtap="selectFromCamera" class="solid-large-btn" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">去拍摄</text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{showSelectColorDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view style="position: absolute;left:0;right: 0;bottom: 0;height:400rpx;background-color: white;display: flex;flex-direction: column;">
+            <view style="width: 100%;height:100rpx;display: flex;flex-direction: row;justify-content: space-between;background-color: gainsboro;">
+                <view style="background-color: white;">
+                    <text style="color:#FD4274;font-size:40rpx;padding:20rpx;line-height: 100rpx;">颜色</text>
+                </view>
+                <view bindtap="confirmSelectColor" style="background-color: #FD4274;">
+                    <text style="color:white;font-size:40rpx;padding:20rpx;line-height: 100rpx;">确定</text>
+                </view>
+            </view>
+            <scroll-view scrollY="true" style="width: 100%;height:300rpx;">
+                <view style="margin-left: 17rpx;">
+                    <view bindtap="selectColor" data-item="{{item}}" style="width:80rpx;height:80rpx;background-color: {{item}};display: inline-block;margin:7rpx;border-radius: 6rpx;position: relative;" wx:for="{{color_list}}" wx:for-index="idx" wx:key="unique">
+                        <view style="position: absolute;left:0rpx;top:0rpx;right:0rpx;bottom: 0rpx;border-radius: 8rpx;border:5rpx solid #FD4274;" wx:if="{{bgColor==item}}"></view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view wx:if="{{showSelectBgPicDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view style="position: absolute;left:0;right: 0;bottom: 0;height:400rpx;background-color: white;display: flex;flex-direction: column;">
+            <view style="width: 100%;height:100rpx;display: flex;flex-direction: row;background-color: #EEEEEE;position: relative;">
+                <view style="height:100%;width:650rpx;">
+                    <scroll-view class="scroll-view_H" enableFlex="{{true}}" enhanced="{{true}}" scrollIntoView="{{menuItemId}}" scrollX="{{true}}" showScrollbar="{{false}}">
+                        <view bindtap="selectPicCategory" data-item="{{item}}" id="{{bg_pic_category_id_list[idx]}}" wx:for="{{bg_pic_category_list}}" wx:for-index="idx" wx:key="unique">
+                            <view style="background-color: white;" wx:if="{{currentCategory==item}}">
+                                <text style="color:#FD4274;font-size:35rpx;line-height: 100rpx;padding:20rpx;">{{item}}</text>
+                            </view>
+                            <view wx:else>
+                                <text style="color:#A3B0B9;font-size:35rpx;line-height: 100rpx;padding:20rpx;">{{item}}</text>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view bindtap="confirmSelectBgPic" style="background-color: #FD4274;position: absolute;width:120rpx;right:0;top:0;">
+                    <text style="color:white;font-size:40rpx;padding:20rpx;line-height: 100rpx;">确定</text>
+                </view>
+            </view>
+            <view style="width: 100%;height:300rpx;">
+                <swiper autoplay="{{false}}" bindchange="onPageChange" current="{{pageIndex}}" style="height:100%;">
+                    <swiper-item wx:for="{{bg_pic_category_list}}" wx:for-index="idx" wx:key="unique">
+                        <view style="height:290rpx;margin-left: 5rpx;">
+                            <scroll-view scrollY="true" style="height: 100%;width:100%;">
+                                <view style="width:140rpx;height:140rpx;display: inline-block;margin:5rpx;">
+                                    <image bindtap="selectBgPicFromLocal" class="face-cover" mode="aspectFill" src="../image/icon_select_local_bg.png"></image>
+                                </view>
+                                <view style="width:140rpx;height:140rpx;display: inline-block;margin:5rpx;position: relative;" wx:for="{{picListMap[item]}}" wx:for-index="faceIdx" wx:for-item="bgPicItem" wx:key="unique">
+                                    <image bindtap="onSelectPic" class="face-cover" data-item="{{bgPicItem}}" mode="aspectFill" src="{{bgPicItem.cover}}"></image>
+                                    <view style="position: absolute;left:0;top:0;right:0;bottom: 0;border-radius: 5rpx;border:1rpx solid #FD4274;" wx:if="{{bgPicItem.url==selectedBgPicUrl}}"></view>
+                                </view>
+                            </scroll-view>
+                        </view>
+                    </swiper-item>
+                </swiper>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideSelectSaveTypeDialog" wx:if="{{showSelectSaveTypeDialog}}">
+        <view style="position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: #000000;opacity:0.5;"></view>
+        <view class="hint-dialog">
+            <text style="font-size: 35rpx;color: black;text-align: center;margin-top: 40rpx;">每天有一次免费保存机会，您可以选择使用免费机会或者付费成为VIP</text>
+            <view bindtap="freeSave" class="stroke-large-btn" style="margin-top: 80rpx;">
+                <text style="color:black;font-size:30rpx;text-align:center;width:100%;">免费保存</text>
+            </view>
+            <view bindtap="paySave" class="solid-large-btn" style="margin-top: 20rpx;margin-bottom: 20rpx;">
+                <text style="color:white;font-size:30rpx;text-align:center;width:100%;">去付费</text>
+            </view>
+        </view>
+    </view>
+</view>
